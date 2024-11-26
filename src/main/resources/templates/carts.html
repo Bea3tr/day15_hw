@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>MyCarts</title>
+</head>
+<body>
+
+    <h3>User: <span data-th-text="${user}"></span></h3>
+    <table data-th-object="${cartList}" class="cartId">
+        <tr>
+                <th>Cart No.</th>
+                <th>Item Quantity</th>
+                <th>Cart ID</th>
+        </tr>
+        <tr data-th-each="cart, status:${cartList}">
+            <td><span data-th-text="${status.index + 1}"></span></td>
+            <td><span data-th-text="${cart.count}"></span></td>
+            <td>
+                <a data-th-href="@{/carts/{user}/{id}(user=${user}, id=${cart.id})}">
+                    <span data-th-text="${cart.id}"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/">Back</a>
+            </td>
+            <td></td>
+            <td>
+                <form method="GET" action="/carts/new">
+                    <input type="hidden" name="user" data-th-value="${user}">
+                    <button type="submit">New</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title data-th-text="${id}"></title>
+</head>
+<body>
+    <h3>Cart id: <span data-th-text="${id}"></span></h3>
+    <form method="POST" data-th-action="@{/carts/{user}/{id}(user=${user}, id=${id})}">
+        <table>
+            <tr>
+                <td>Name: </td>
+                <td>
+                    <span data-th-text="${user}"></span>
+                    <!-- <input type="text" name="name" required> -->
+                </td>
+            </tr>
+            <tr>
+                <td>Item: </td>
+                <td>
+                    <input type="text" name="item" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Qty: </td>
+                <td>
+                    <input type="number" name="count" required>
+                </td>
+            </tr>
+            <tr>
+                <td><a data-th-href="@{/carts/{user}(user=${user})}">Save</a></td>
+                <td class="add-button">
+                    <button type="submit">Add</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+    <hr>
+    <br>
+
+    <table data-th-object="${cart}" class="cart">
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+        </tr>
+        <tr data-th-each="item, status:*{cart}">
+            <td><span data-th-text="${item.key}"></span></td>
+            <td><span data-th-text="${item.value}"></span></td>
+        </tr>
+    </table>
+     
+</body>
+</html>
